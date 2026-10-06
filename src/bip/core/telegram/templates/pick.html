@@ -1,0 +1,16 @@
+{# pick.html — Phase 3 Telegram alert template (D-12, D-14, D-15) #}
+{# Length budget ~600 chars rendered. Telegram HTML tags: <b>,<i>,<u>,<s>,<a>,<code>,<pre>. #}
+{# All variables HTML-escaped via Jinja2 autoescape (T-3-XSS). #}
+{%- if pick.claude_validation == "FLAG" -%}
+&#x26A0;&#xFE0F; <b>{{ pick.fixture | e }}</b>
+Claude flagged: <i>{{ pick.reason_code | e }}</i>
+{%- else -%}
+<b>{{ pick.fixture | e }}</b>
+{%- endif %}
+
+<b>{{ pick.market | e }}</b>: {{ pick.selection | e }} @ <b>{{ "%.2f"|format(pick.best_odds) }}</b>
+Edge: <b>+{{ "%.1f"|format(pick.edge * 100) }}%</b> · Stake: <b>{{ "%.1f"|format(pick.suggested_stake or 0.0) }}u</b>
+Model: {{ "%.0f"|format(pick.model_probability * 100) }}% · Bookmaker: {{ pick.bookmaker | e }}
+{% for bullet in summary_bullets[:3] %}
+• {{ bullet | e }}{% endfor %}
+<i>v{{ pick.model_version | e }} · Claude {{ pick.claude_validation | e }}</i>

@@ -1,0 +1,60 @@
+[Unit]
+Description=Betting Intelligence Platform
+Documentation=https://github.com/your-org/betting-intelligence-platform
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+# RESEARCH §1: WatchdogSec= REQUIRES Type=notify + sd_notify("WATCHDOG=1") calls.
+# CONTEXT.md D-07's file-mtime-only design is incorrect — Wave 2 HeartbeatTicker
+# implements sd_notify alongside the file touch.
+Type=notify
+NotifyAccess=main
+WatchdogSec=600
+
+# T-4-05: run as dedicated unprivileged system user (created by install.sh).
+User=bip
+Group=bip
+WorkingDirectory=/opt/bip
+EnvironmentFile=/etc/bip/.env
+ExecStart=/opt/bip/.venv/bin/python -m bip.production
+
+# Restart policy
+Restart=always
+RestartSec=10
+
+# Logging: structlog JSON → journald (no intermediate file).
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=bip
+
+# Hardening (RESEARCH §systemd Unit Hardening — verified safe for this workload).
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/run/bip
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+# DISABLED by default (RESEARCH §Pitfall 8): CatBoost/XGBoost/LightGBM use mmap with
+# PROT_EXEC for CPU-dispatch JIT, which MemoryDenyWriteExecute=true blocks. Enabling
+# this directive without a verified staging smoke-test will likely break the service
+# on first start with "mmap: Permission denied". To enable: uncomment the line below
+# and run deploy/SMOKE_TEST.md Check 5 against THIS host with all ML wheels imported.
+# MemoryDenyWriteExecute=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources
+
+# Resource limits — tune per VPS.
+LimitNOFILE=4096
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target

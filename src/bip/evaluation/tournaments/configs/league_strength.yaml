@@ -1,0 +1,139 @@
+# League strength multipliers — Shelopugin (2023) Glicko-2 grounded.
+#
+# Reference league: Premier League (multiplier = 1.0, glicko_rating = 2118.8).
+# Other leagues scaled relative via:
+#
+#     multiplier = exp(α · (rating − 2118.8))   with α = 0.001/Glicko-pt
+#
+# (See `bip.evaluation.tournaments.data.league_strength` module docstring
+# for the empirical α derivation against the operator's pre-Phase-4 table.)
+#
+# `glicko_rating` carries Shelopugin Table V (Europe) / Table VI (South
+# America) values directly. Leagues outside his sample (MLS, Saudi, J1, K1,
+# Süper Lig, Greek, Belgian Pro) leave it null and rely on operator-tuned
+# multipliers; their `confidence` field flags how much to trust each value.
+#
+# Confidence levels:
+#   high   -- Shelopugin Table V/VI rating + operator validation
+#   medium -- Shelopugin OR operator (one source)
+#   low    -- placeholder; revisit post-WC2026 backtest
+#
+# Adding a league: pick its API-Football league_id from /leagues. If it
+# appears in Shelopugin Table V/VI, set `glicko_rating` and let the
+# `multiplier` derive from `derive_multiplier_from_glicko()` (or override
+# explicitly with a justified note). Otherwise set `glicko_rating: null`
+# and tune `multiplier` from operator domain knowledge / Club Elo proxy.
+
+leagues:
+  # ── European top-5 (Shelopugin Table V) ──────────────────────────────────
+  - api_football_league_id: 39
+    name: "Premier League (England)"
+    glicko_rating: 2118.8
+    multiplier: 1.00
+    confidence: high
+
+  - api_football_league_id: 78
+    name: "Bundesliga (Germany)"
+    glicko_rating: 2069.9
+    multiplier: 0.95
+    confidence: high
+
+  - api_football_league_id: 135
+    name: "Serie A (Italy)"
+    glicko_rating: 2064.0
+    multiplier: 0.95
+    confidence: high
+
+  - api_football_league_id: 140
+    name: "La Liga (Spain)"
+    glicko_rating: 2039.4
+    multiplier: 0.92
+    confidence: high
+
+  - api_football_league_id: 61
+    name: "Ligue 1 (France)"
+    glicko_rating: 1981.4
+    multiplier: 0.87
+    confidence: high
+
+  # ── Other Shelopugin Table V (European) ──────────────────────────────────
+  - api_football_league_id: 94
+    name: "Primeira Liga (Portugal)"
+    glicko_rating: 2000.7
+    multiplier: 0.89
+    confidence: high
+
+  - api_football_league_id: 88
+    name: "Eredivisie (Netherlands)"
+    glicko_rating: 1965.8
+    multiplier: 0.86
+    confidence: high
+
+  # ── South American top tier (Shelopugin Table VI) ────────────────────────
+  - api_football_league_id: 71
+    name: "Brasileirão Série A"
+    glicko_rating: 1868.4
+    multiplier: 0.78
+    confidence: high
+
+  - api_football_league_id: 128
+    name: "Argentine Primera División"
+    glicko_rating: 1779.9
+    multiplier: 0.71
+    confidence: high
+
+  # ── Outside Shelopugin sample (operator-tuned, glicko_rating: null) ──────
+  - api_football_league_id: 144
+    name: "Belgian Pro League"
+    glicko_rating: null
+    multiplier: 0.72
+    confidence: medium
+
+  - api_football_league_id: 253
+    name: "Major League Soccer (USA/CAN)"
+    glicko_rating: null
+    multiplier: 0.55
+    confidence: medium
+
+  - api_football_league_id: 307
+    name: "Saudi Pro League"
+    glicko_rating: null
+    multiplier: 0.60
+    confidence: medium
+
+  - api_football_league_id: 98
+    name: "J1 League (Japan)"
+    glicko_rating: null
+    multiplier: 0.62
+    confidence: low
+
+  - api_football_league_id: 292
+    name: "K League 1 (South Korea)"
+    glicko_rating: null
+    multiplier: 0.55
+    confidence: low
+
+  - api_football_league_id: 169
+    name: "Süper Lig (Turkey)"
+    glicko_rating: null
+    multiplier: 0.70
+    confidence: low
+
+  - api_football_league_id: 197
+    name: "Greek Super League"
+    glicko_rating: null
+    multiplier: 0.65
+    confidence: low
+
+  # ── UEFA competitions (operator-tuned; not domestic leagues) ─────────────
+  - api_football_league_id: 2
+    name: "UEFA Champions League"
+    glicko_rating: null
+    multiplier: 1.10
+    confidence: high
+
+  - api_football_league_id: 3
+    name: "UEFA Europa League"
+    glicko_rating: null
+    multiplier: 0.95
+    confidence: medium

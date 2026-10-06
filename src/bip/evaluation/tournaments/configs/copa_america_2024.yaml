@@ -1,0 +1,15 @@
+# CONMEBOL Copa América 2024 — United States (backtest target)
+# Format: 16 teams, 4 groups of 4, top-2 advance, QF -> SF -> Final.
+
+slug: copa_america_2024
+name: "CONMEBOL Copa América 2024"
+format: groups_knockout
+season: 2024
+start_date: 2024-06-20
+end_date: 2024-07-14
+participants_count: 16
+teams_advancing_per_group: 2
+best_third_placed_count: 0
+knockout_bracket_size: 8
+groups: []
+matches: []

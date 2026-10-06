@@ -1,0 +1,28 @@
+name: "Bundesliga"
+slug: "bundesliga"
+country: "Germany"
+
+api_mappings:
+  api_football_league_id: 78
+  odds_api_sport_key: "soccer_germany_bundesliga"
+  team_name_mappings:
+    "Borussia Dortmund": "Dortmund"
+    "Borussia Monchengladbach": "Gladbach"
+    "RB Leipzig": "Leipzig"
+    "Bayer Leverkusen": "Leverkusen"
+    "Eintracht Frankfurt": "Frankfurt"
+
+season_structure:
+  start_month: 8
+  end_month: 5
+  typical_matchdays: 34
+  winter_break: true
+
+model_params:
+  calibration_method: "isotonic"
+  edge_threshold_btts: 0.05
+  edge_threshold_ah: 0.06
+  edge_threshold_ou: 0.05
+  edge_threshold_1x2: 0.08
+  edge_threshold_corners: 0.07
+  min_sample_size: 500

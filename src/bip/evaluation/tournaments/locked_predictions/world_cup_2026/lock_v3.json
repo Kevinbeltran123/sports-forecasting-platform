@@ -1,0 +1,1346 @@
+{
+  "schema_version": "1.0",
+  "tournament_slug": "world_cup_2026",
+  "locked_at": "2026-05-23T21:07:56.907371Z",
+  "git_sha": null,
+  "calibration_status": "below-gate",
+  "held_out_tournaments": [
+    "wc_2022",
+    "afcon_2023",
+    "copa_2024",
+    "euro_2024"
+  ],
+  "n_fixtures_total": 72,
+  "n_fixtures_with_predictions": 72,
+  "coverage_threshold": 0.9,
+  "predictor_verdicts": [
+    {
+      "predictor_name": "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy",
+      "n_markets": 3,
+      "market_statuses": {
+        "1X2": "below-gate",
+        "btts": "below-gate",
+        "goals_total_o_u_2_5": "below-gate"
+      },
+      "market_brier_for_gate": {
+        "1X2": 0.2126,
+        "btts": 0.2586,
+        "goals_total_o_u_2_5": 0.2508
+      },
+      "market_classwise_ece": {
+        "1X2": 0.1145,
+        "btts": 0.0802,
+        "goals_total_o_u_2_5": 0.0668
+      },
+      "overall_status": "below-gate"
+    }
+  ],
+  "operator_overrides": [
+    "Ola 1.C (hierarchical Bayesian pooling, Macrì-Demartino 2024) feasibility check FAILED on toy synthetic corpus (3 tournaments × 10 teams × 50 matches): ESS 299 < 400 gate, 24 divergent transitions > 0 gate (max R-hat 1.010 ✓, p95 latency 6.81ms ✓). Toy is strictly MORE generous than the real calibration corpus (n=115 across 2 tournaments ≈ 1.8 obs per team-tournament cell). Gelman 2005 small-n complete-pooling collapse predicted and empirically confirmed. Non-centered parameterisation already in use. C killed; 7-day Wave 2.C budget reallocated.",
+    "Ola 2.A (Transfermarkt squad market value, Peeters 2018) ATTACK-only mode, β sweep {0.02, 0.05, 0.10, 0.15, 0.20}: monotonic worsening. ΔBrier ranges from -0.0007 [-0.0017, +0.0002] (β=0.02, NS) to -0.0134 [-0.0224, -0.0046] (β=0.20, significantly WORSE). 0/4 tournaments improved at any β. Confirms Brown et al. 2024 adversarial prediction: TM signal already absorbed by weighted-MLE strength prior fit on 49k martj42 matches.",
+    "Ola 2.A.7 (Transfermarkt SYMMETRIC mode rescue) β sweep {0.005, 0.01, 0.02, 0.05, 0.10}: no-harm but no improvement. All ΔBrier CIs cross zero (NS); 2/4 tournaments improve at small β but Gate 3 (ΔBrier ≥ +0.005) fails at every β. Symmetric corrects the asymmetric bias but provides ZERO incremental signal on top of the strength prior. A ruled out in both modes.",
+    "FAIL verdict: A + C both killed. No v3 predictor changes ship. Lock_v3 prediction values mirror lock_v2 (same CalibratedDIBPPredictor with v2 toggles ON, use_market_value=False). The v3 lock exists purely as the audit artifact documenting the additional A + C falsification evidence. See Papers/WC2026_V3_RESULTS.md for full methodology + per-tournament breakdowns.",
+    "Lock_v1 (commit 8c0ce19, bayesian_bivariate_xg_blended ρ=0.0 α=0.20) remains the WC2026 production path. lock_v3.json NOT registered in ModelRegistry. Parent locks: lock.json (v1, production), lock_v2.json (v2 FAIL audit). v3 ships Pinnacle CLV infrastructure (Ola 2.D) in parallel; that's the only positive-functionality deliverable of this sprint.",
+    "Sprint outcome distribution: matches the ~20% pessimistic case from Papers/WC2026_V3_CANDIDATES_EVALUATION.md §3.1 — both A and C fail gates, lock_v1 unchanged, v3 documented as rigorous negative result. Lock_v1 baseline confirmed as strong local optimum at this corpus scale across DIBP, beta-cal, match-importance (v2 spike), hierarchical Bayesian, and Transfermarkt market value (v3 spike)."
+  ],
+  "forced_emit_reason": "Ola 3.F FAIL-verdict v3 audit emission. The v3 spike (Olas 0-2.D) explored two new academic signals on the WC2026 hold-out: hierarchical Bayesian pooling (Macrì-Demartino 2024) for the AFCON regime, and Transfermarkt squad market value covariate (Peeters 2018) in both attack-only and symmetric variants. C killed at toy feasibility (PyMC NUTS divergences + ESS < gate). A killed across 10 β values × 2 modes (no improvement direction; mechanism subsumed by strength prior). Per .planning/wc2026-improvement-v3/PLAN.md §'Verdict matrix' = FAIL branch: lock_v3.json written for post-mortem but NOT registered; lock_v1 ships unchanged. Pinnacle CLV (Ola 2.D) ships separately as infrastructure.",
+  "fixtures": [
+    {
+      "match_id": "wc2026_grp_000",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-11T00:00:00Z",
+      "home_team_id": 17,
+      "away_team_id": 63,
+      "home_team_name": "Mexico",
+      "away_team_name": "South Africa",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.6238525106171191,
+          "p_draw": 0.23270142213869166,
+          "p_away_win": 0.14344606724418923,
+          "p_btts": 0.46720008437878074,
+          "p_over_2_5": 0.5023280407520156
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_001",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-11T00:00:00Z",
+      "home_team_id": 25,
+      "away_team_id": 42,
+      "home_team_name": "South Korea",
+      "away_team_name": "Czech Republic",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.4145435085323259,
+          "p_draw": 0.2710929809789964,
+          "p_away_win": 0.31436351048867767,
+          "p_btts": 0.5254565022813077,
+          "p_over_2_5": 0.5027399639555461
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_002",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-12T00:00:00Z",
+      "home_team_id": 47,
+      "away_team_id": 76,
+      "home_team_name": "Canada",
+      "away_team_name": "Bosnia and Herzegovina",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.5559156060680497,
+          "p_draw": 0.24680424723233688,
+          "p_away_win": 0.1972801466996135,
+          "p_btts": 0.5076356545113238,
+          "p_over_2_5": 0.5029564204168757
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_003",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-12T00:00:00Z",
+      "home_team_id": 46,
+      "away_team_id": 75,
+      "home_team_name": "United States",
+      "away_team_name": "Paraguay",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.36843688135443103,
+          "p_draw": 0.29787573443721777,
+          "p_away_win": 0.3336873842083513,
+          "p_btts": 0.483290001120227,
+          "p_over_2_5": 0.5008034424948832
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_004",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-13T00:00:00Z",
+      "home_team_id": 44,
+      "away_team_id": 21,
+      "home_team_name": "Qatar",
+      "away_team_name": "Switzerland",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.11442360643888776,
+          "p_draw": 0.16602202513832973,
+          "p_away_win": 0.7195543684227826,
+          "p_btts": 0.5412226058244758,
+          "p_over_2_5": 0.5097372244618072
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_005",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-13T00:00:00Z",
+      "home_team_id": 20,
+      "away_team_id": 6,
+      "home_team_name": "Brazil",
+      "away_team_name": "Morocco",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.5404557248267148,
+          "p_draw": 0.27933398981310814,
+          "p_away_win": 0.1802102853601771,
+          "p_btts": 0.43175140817341173,
+          "p_over_2_5": 0.5004234106526098
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_006",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-13T00:00:00Z",
+      "home_team_id": 77,
+      "away_team_id": 41,
+      "home_team_name": "Haiti",
+      "away_team_name": "Scotland",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.12923007349595284,
+          "p_draw": 0.19000187346821384,
+          "p_away_win": 0.6807680530358333,
+          "p_btts": 0.5233821709691491,
+          "p_over_2_5": 0.5065672221529911
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_007",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-13T00:00:00Z",
+      "home_team_id": 11,
+      "away_team_id": 32,
+      "home_team_name": "Australia",
+      "away_team_name": "Turkey",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.4186021850934319,
+          "p_draw": 0.2646337410878565,
+          "p_away_win": 0.3167640738187117,
+          "p_btts": 0.5351267938644604,
+          "p_over_2_5": 0.503428218853423
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_008",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-14T00:00:00Z",
+      "home_team_id": 16,
+      "away_team_id": 78,
+      "home_team_name": "Germany",
+      "away_team_name": "Curaçao",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.9639325298454461,
+          "p_draw": 0.027985758572420177,
+          "p_away_win": 0.00808171158213383,
+          "p_btts": 0.4202993907428585,
+          "p_over_2_5": 0.5286422603436001
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_009",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-14T00:00:00Z",
+      "home_team_id": 79,
+      "away_team_id": 45,
+      "home_team_name": "Ivory Coast",
+      "away_team_name": "Ecuador",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.28606640022421526,
+          "p_draw": 0.3422065186162285,
+          "p_away_win": 0.37172708115955616,
+          "p_btts": 0.3889825849219526,
+          "p_over_2_5": 0.4992813252862251
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_010",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-14T00:00:00Z",
+      "home_team_id": 38,
+      "away_team_id": 31,
+      "home_team_name": "Netherlands",
+      "away_team_name": "Japan",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.5885983555724451,
+          "p_draw": 0.21732634113474278,
+          "p_away_win": 0.19407530329281206,
+          "p_btts": 0.5476939714621301,
+          "p_over_2_5": 0.5066115248350637
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_011",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-14T00:00:00Z",
+      "home_team_id": 24,
+      "away_team_id": 26,
+      "home_team_name": "Sweden",
+      "away_team_name": "Tunisia",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.5209598900316639,
+          "p_draw": 0.25612125507217853,
+          "p_away_win": 0.22291885489615748,
+          "p_btts": 0.5121643985638084,
+          "p_over_2_5": 0.5027673662229466
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_012",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-15T00:00:00Z",
+      "home_team_id": 22,
+      "away_team_id": 2,
+      "home_team_name": "Belgium",
+      "away_team_name": "Egypt",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.6475748316650723,
+          "p_draw": 0.22064891557241256,
+          "p_away_win": 0.131776252762515,
+          "p_btts": 0.4701546691606714,
+          "p_over_2_5": 0.5028646066401559
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_013",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-15T00:00:00Z",
+      "home_team_id": 7,
+      "away_team_id": 80,
+      "home_team_name": "Iran",
+      "away_team_name": "New Zealand",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.653151281714896,
+          "p_draw": 0.2388479050642283,
+          "p_away_win": 0.10800081322087575,
+          "p_btts": 0.37860465956275746,
+          "p_over_2_5": 0.5007164320525604
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_014",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-15T00:00:00Z",
+      "home_team_id": 5,
+      "away_team_id": 81,
+      "home_team_name": "Spain",
+      "away_team_name": "Cape Verde",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.9315639792370298,
+          "p_draw": 0.05350846345042908,
+          "p_away_win": 0.014927557312541006,
+          "p_btts": 0.3726535730303006,
+          "p_over_2_5": 0.5164371715138647
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_015",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-15T00:00:00Z",
+      "home_team_id": 1,
+      "away_team_id": 3,
+      "home_team_name": "Saudi Arabia",
+      "away_team_name": "Uruguay",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.13923789998294636,
+          "p_draw": 0.27027796911894675,
+          "p_away_win": 0.5904841308981068,
+          "p_btts": 0.3862394198107832,
+          "p_over_2_5": 0.5001233234316045
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_016",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-16T00:00:00Z",
+      "home_team_id": 10,
+      "away_team_id": 29,
+      "home_team_name": "France",
+      "away_team_name": "Senegal",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.6230461922827446,
+          "p_draw": 0.23597314510820602,
+          "p_away_win": 0.14098066260904943,
+          "p_btts": 0.4566522773521214,
+          "p_over_2_5": 0.5019800441654698
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_017",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-16T00:00:00Z",
+      "home_team_id": 82,
+      "away_team_id": 83,
+      "home_team_name": "Iraq",
+      "away_team_name": "Norway",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.14536900523565663,
+          "p_draw": 0.21774799136065048,
+          "p_away_win": 0.6368830034036929,
+          "p_btts": 0.4982960934452629,
+          "p_over_2_5": 0.5038544718020183
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_018",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-16T00:00:00Z",
+      "home_team_id": 12,
+      "away_team_id": 55,
+      "home_team_name": "Argentina",
+      "away_team_name": "Algeria",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.7418581297657849,
+          "p_draw": 0.17477710114308606,
+          "p_away_win": 0.0833647690911291,
+          "p_btts": 0.4474917007316091,
+          "p_over_2_5": 0.504478371217733
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_019",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-16T00:00:00Z",
+      "home_team_id": 36,
+      "away_team_id": 84,
+      "home_team_name": "Austria",
+      "away_team_name": "Jordan",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.7093903264136792,
+          "p_draw": 0.18207656392592414,
+          "p_away_win": 0.10853310966039664,
+          "p_btts": 0.5008134859045938,
+          "p_over_2_5": 0.5059090013100298
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_020",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-17T00:00:00Z",
+      "home_team_id": 4,
+      "away_team_id": 85,
+      "home_team_name": "Portugal",
+      "away_team_name": "DR Congo",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.796496635247394,
+          "p_draw": 0.14461490564023818,
+          "p_away_win": 0.05888845911236781,
+          "p_btts": 0.42315539252608936,
+          "p_over_2_5": 0.5057652629786145
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_021",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-17T00:00:00Z",
+      "home_team_id": 86,
+      "away_team_id": 30,
+      "home_team_name": "Uzbekistan",
+      "away_team_name": "Colombia",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.17938181237994524,
+          "p_draw": 0.2699988701555065,
+          "p_away_win": 0.5506193174645482,
+          "p_btts": 0.44813836923507216,
+          "p_over_2_5": 0.5008533851601004
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_022",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-17T00:00:00Z",
+      "home_team_id": 27,
+      "away_team_id": 8,
+      "home_team_name": "England",
+      "away_team_name": "Croatia",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.5821647821176857,
+          "p_draw": 0.24814948704737022,
+          "p_away_win": 0.16968573083494407,
+          "p_btts": 0.47633833111144935,
+          "p_over_2_5": 0.5020096128829388
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_023",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-17T00:00:00Z",
+      "home_team_id": 48,
+      "away_team_id": 23,
+      "home_team_name": "Ghana",
+      "away_team_name": "Panama",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.4704159916405347,
+          "p_draw": 0.28077386266456406,
+          "p_away_win": 0.24881014569490129,
+          "p_btts": 0.48735537144479746,
+          "p_over_2_5": 0.5012994158751541
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_024",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-18T00:00:00Z",
+      "home_team_id": 42,
+      "away_team_id": 63,
+      "home_team_name": "Czech Republic",
+      "away_team_name": "South Africa",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.6328119947423074,
+          "p_draw": 0.21625043346652087,
+          "p_away_win": 0.1509375717911718,
+          "p_btts": 0.5087660381768725,
+          "p_over_2_5": 0.5043347421947445
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_025",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-18T00:00:00Z",
+      "home_team_id": 17,
+      "away_team_id": 25,
+      "home_team_name": "Mexico",
+      "away_team_name": "South Korea",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.46208053978741453,
+          "p_draw": 0.2836068937343326,
+          "p_away_win": 0.2543125664782529,
+          "p_btts": 0.4854039723637,
+          "p_over_2_5": 0.5011842787699302
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_026",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-18T00:00:00Z",
+      "home_team_id": 21,
+      "away_team_id": 76,
+      "home_team_name": "Switzerland",
+      "away_team_name": "Bosnia and Herzegovina",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.7495574061149325,
+          "p_draw": 0.15964806395116884,
+          "p_away_win": 0.09079452993389879,
+          "p_btts": 0.5061303234092749,
+          "p_over_2_5": 0.5077759640760495
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_027",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-18T00:00:00Z",
+      "home_team_id": 47,
+      "away_team_id": 44,
+      "home_team_name": "Canada",
+      "away_team_name": "Qatar",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.6720865883225845,
+          "p_draw": 0.19343159785911918,
+          "p_away_win": 0.13448181381829633,
+          "p_btts": 0.5251853236074969,
+          "p_over_2_5": 0.5064539831842291
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_028",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-19T00:00:00Z",
+      "home_team_id": 41,
+      "away_team_id": 6,
+      "home_team_name": "Scotland",
+      "away_team_name": "Morocco",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.2695454259080605,
+          "p_draw": 0.31195503332677527,
+          "p_away_win": 0.41849954076516416,
+          "p_btts": 0.44142496023070865,
+          "p_over_2_5": 0.4999581768515921
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_029",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-19T00:00:00Z",
+      "home_team_id": 20,
+      "away_team_id": 77,
+      "home_team_name": "Brazil",
+      "away_team_name": "Haiti",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.9665216453021529,
+          "p_draw": 0.026536335948485347,
+          "p_away_win": 0.00694201874936181,
+          "p_btts": 0.3851856264347558,
+          "p_over_2_5": 0.5274264534800652
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_030",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-19T00:00:00Z",
+      "home_team_id": 46,
+      "away_team_id": 11,
+      "home_team_name": "United States",
+      "away_team_name": "Australia",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.3932728171200486,
+          "p_draw": 0.27645035103469134,
+          "p_away_win": 0.33027683184526,
+          "p_btts": 0.51965131217124,
+          "p_over_2_5": 0.5023340704386854
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_031",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-19T00:00:00Z",
+      "home_team_id": 32,
+      "away_team_id": 75,
+      "home_team_name": "Turkey",
+      "away_team_name": "Paraguay",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.43772271070314406,
+          "p_draw": 0.2806399612762109,
+          "p_away_win": 0.2816373280206451,
+          "p_btts": 0.5020278769083216,
+          "p_over_2_5": 0.5016585540705185
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_032",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-20T00:00:00Z",
+      "home_team_id": 16,
+      "away_team_id": 79,
+      "home_team_name": "Germany",
+      "away_team_name": "Ivory Coast",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.6799421548089082,
+          "p_draw": 0.1909824477540746,
+          "p_away_win": 0.12907539743701732,
+          "p_btts": 0.5214465414704198,
+          "p_over_2_5": 0.5063895425387261
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_033",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-20T00:00:00Z",
+      "home_team_id": 45,
+      "away_team_id": 78,
+      "home_team_name": "Ecuador",
+      "away_team_name": "Curaçao",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.8547048861179857,
+          "p_draw": 0.11431658137972676,
+          "p_away_win": 0.030978532502287458,
+          "p_btts": 0.3102703820414808,
+          "p_over_2_5": 0.505598052127807
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_034",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-20T00:00:00Z",
+      "home_team_id": 38,
+      "away_team_id": 24,
+      "home_team_name": "Netherlands",
+      "away_team_name": "Sweden",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.6651916995714303,
+          "p_draw": 0.1842833722949076,
+          "p_away_win": 0.15052492813366197,
+          "p_btts": 0.5556343528616745,
+          "p_over_2_5": 0.5098275169459143
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_035",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-20T00:00:00Z",
+      "home_team_id": 26,
+      "away_team_id": 31,
+      "home_team_name": "Tunisia",
+      "away_team_name": "Japan",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.2960202014409326,
+          "p_draw": 0.2881313012587862,
+          "p_away_win": 0.4158484973002811,
+          "p_btts": 0.4938442103256552,
+          "p_over_2_5": 0.5012537921213321
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_036",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-21T00:00:00Z",
+      "home_team_id": 22,
+      "away_team_id": 7,
+      "home_team_name": "Belgium",
+      "away_team_name": "Iran",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.6499650224618042,
+          "p_draw": 0.2058786073413521,
+          "p_away_win": 0.14415637019684363,
+          "p_btts": 0.5174876838911665,
+          "p_over_2_5": 0.5052816261888948
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_037",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-21T00:00:00Z",
+      "home_team_id": 80,
+      "away_team_id": 2,
+      "home_team_name": "New Zealand",
+      "away_team_name": "Egypt",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.1976666315298492,
+          "p_draw": 0.3374814665178856,
+          "p_away_win": 0.4648519019522653,
+          "p_btts": 0.34399819412857724,
+          "p_over_2_5": 0.49917307973239206
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_038",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-21T00:00:00Z",
+      "home_team_id": 5,
+      "away_team_id": 1,
+      "home_team_name": "Spain",
+      "away_team_name": "Saudi Arabia",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.8959778581605221,
+          "p_draw": 0.07990562112744169,
+          "p_away_win": 0.024116520712036262,
+          "p_btts": 0.375221951099031,
+          "p_over_2_5": 0.5112329059213188
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_039",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-21T00:00:00Z",
+      "home_team_id": 3,
+      "away_team_id": 81,
+      "home_team_name": "Uruguay",
+      "away_team_name": "Cape Verde",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.77817750906893,
+          "p_draw": 0.16389738058832712,
+          "p_away_win": 0.057925110342742794,
+          "p_btts": 0.36218347145839563,
+          "p_over_2_5": 0.5032316619633979
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_040",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-22T00:00:00Z",
+      "home_team_id": 10,
+      "away_team_id": 82,
+      "home_team_name": "France",
+      "away_team_name": "Iraq",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.8660381789671028,
+          "p_draw": 0.10119196004449837,
+          "p_away_win": 0.0327698609883989,
+          "p_btts": 0.3816766238968604,
+          "p_over_2_5": 0.5085765161565668
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_041",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-22T00:00:00Z",
+      "home_team_id": 83,
+      "away_team_id": 29,
+      "home_team_name": "Norway",
+      "away_team_name": "Senegal",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.4802495846934994,
+          "p_draw": 0.2677925435412194,
+          "p_away_win": 0.2519578717652812,
+          "p_btts": 0.510410854937667,
+          "p_over_2_5": 0.5023013705105853
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_042",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-22T00:00:00Z",
+      "home_team_id": 12,
+      "away_team_id": 36,
+      "home_team_name": "Argentina",
+      "away_team_name": "Austria",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.6720589325235614,
+          "p_draw": 0.21428122225377005,
+          "p_away_win": 0.11365984522266848,
+          "p_btts": 0.444926578556611,
+          "p_over_2_5": 0.5025245546758009
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_043",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-22T00:00:00Z",
+      "home_team_id": 84,
+      "away_team_id": 55,
+      "home_team_name": "Jordan",
+      "away_team_name": "Algeria",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.2535120326867366,
+          "p_draw": 0.2487615411358434,
+          "p_away_win": 0.49772642617742,
+          "p_btts": 0.5386923570958624,
+          "p_over_2_5": 0.5042980279844007
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_044",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-23T00:00:00Z",
+      "home_team_id": 4,
+      "away_team_id": 86,
+      "home_team_name": "Portugal",
+      "away_team_name": "Uzbekistan",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.779497460590294,
+          "p_draw": 0.1546385123900249,
+          "p_away_win": 0.0658640270196811,
+          "p_btts": 0.42936042328101587,
+          "p_over_2_5": 0.5052313938660502
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_045",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-23T00:00:00Z",
+      "home_team_id": 30,
+      "away_team_id": 85,
+      "home_team_name": "Colombia",
+      "away_team_name": "DR Congo",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.7075892411275396,
+          "p_draw": 0.20021680818831436,
+          "p_away_win": 0.09219395068414606,
+          "p_btts": 0.4164614923258394,
+          "p_over_2_5": 0.5025209581476523
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_046",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-23T00:00:00Z",
+      "home_team_id": 27,
+      "away_team_id": 48,
+      "home_team_name": "England",
+      "away_team_name": "Ghana",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.8252976574202162,
+          "p_draw": 0.13124422158228669,
+          "p_away_win": 0.04345812099749715,
+          "p_btts": 0.3653986716489511,
+          "p_over_2_5": 0.5053538095827818
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_047",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-23T00:00:00Z",
+      "home_team_id": 23,
+      "away_team_id": 8,
+      "home_team_name": "Panama",
+      "away_team_name": "Croatia",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.13600018462637664,
+          "p_draw": 0.20947118457554034,
+          "p_away_win": 0.6545286307980831,
+          "p_btts": 0.4990002023374238,
+          "p_over_2_5": 0.5042810336437634
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_048",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-24T00:00:00Z",
+      "home_team_id": 17,
+      "away_team_id": 42,
+      "home_team_name": "Mexico",
+      "away_team_name": "Czech Republic",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.4484030783030668,
+          "p_draw": 0.27651326467156556,
+          "p_away_win": 0.2750836570253677,
+          "p_btts": 0.5064315098537473,
+          "p_over_2_5": 0.5019027862300477
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_049",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-24T00:00:00Z",
+      "home_team_id": 63,
+      "away_team_id": 25,
+      "home_team_name": "South Africa",
+      "away_team_name": "South Korea",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.2776840430162543,
+          "p_draw": 0.2763584691440728,
+          "p_away_win": 0.4459574878396729,
+          "p_btts": 0.5076303479733446,
+          "p_over_2_5": 0.5019428520888863
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_050",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-24T00:00:00Z",
+      "home_team_id": 47,
+      "away_team_id": 21,
+      "home_team_name": "Canada",
+      "away_team_name": "Switzerland",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.2696378014165433,
+          "p_draw": 0.26497344909427334,
+          "p_away_win": 0.46538874948918335,
+          "p_btts": 0.5223291275443857,
+          "p_over_2_5": 0.5028306955131111
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_051",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-24T00:00:00Z",
+      "home_team_id": 76,
+      "away_team_id": 44,
+      "home_team_name": "Bosnia and Herzegovina",
+      "away_team_name": "Qatar",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.5580139826839448,
+          "p_draw": 0.22512482311246876,
+          "p_away_win": 0.21686119420358646,
+          "p_btts": 0.5510703442393274,
+          "p_over_2_5": 0.506462963776348
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_052",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-24T00:00:00Z",
+      "home_team_id": 41,
+      "away_team_id": 20,
+      "home_team_name": "Scotland",
+      "away_team_name": "Brazil",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.168607153175039,
+          "p_draw": 0.22721848141854847,
+          "p_away_win": 0.6041743654064126,
+          "p_btts": 0.5116334890947075,
+          "p_over_2_5": 0.503932280704594
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_053",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-24T00:00:00Z",
+      "home_team_id": 6,
+      "away_team_id": 77,
+      "home_team_name": "Morocco",
+      "away_team_name": "Haiti",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.8715979768162028,
+          "p_draw": 0.09833232963925215,
+          "p_away_win": 0.030069693544545164,
+          "p_btts": 0.36408305644654215,
+          "p_over_2_5": 0.5084173743697822
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_054",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-25T00:00:00Z",
+      "home_team_id": 46,
+      "away_team_id": 32,
+      "home_team_name": "United States",
+      "away_team_name": "Turkey",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.38731724799398015,
+          "p_draw": 0.24592703037103747,
+          "p_away_win": 0.3667557216349825,
+          "p_btts": 0.5606416217845902,
+          "p_over_2_5": 0.5063618276766684
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_055",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-25T00:00:00Z",
+      "home_team_id": 75,
+      "away_team_id": 11,
+      "home_team_name": "Paraguay",
+      "away_team_name": "Australia",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.41278623493129873,
+          "p_draw": 0.31867229002171626,
+          "p_away_win": 0.26854147504698495,
+          "p_btts": 0.42830622242838456,
+          "p_over_2_5": 0.4997426522132337
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_056",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-25T00:00:00Z",
+      "home_team_id": 78,
+      "away_team_id": 79,
+      "home_team_name": "Curaçao",
+      "away_team_name": "Ivory Coast",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.11031043419480806,
+          "p_draw": 0.2118711378565643,
+          "p_away_win": 0.6778184279486277,
+          "p_btts": 0.4418933782870769,
+          "p_over_2_5": 0.502555483781664
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_057",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-25T00:00:00Z",
+      "home_team_id": 45,
+      "away_team_id": 16,
+      "home_team_name": "Ecuador",
+      "away_team_name": "Germany",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.3429906092223665,
+          "p_draw": 0.28453537117008604,
+          "p_away_win": 0.37247401960754756,
+          "p_btts": 0.5076072121808605,
+          "p_over_2_5": 0.5017012962525905
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_058",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-25T00:00:00Z",
+      "home_team_id": 31,
+      "away_team_id": 24,
+      "home_team_name": "Japan",
+      "away_team_name": "Sweden",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.5149667929003293,
+          "p_draw": 0.23818356312883124,
+          "p_away_win": 0.24684964397083958,
+          "p_btts": 0.5490338765890546,
+          "p_over_2_5": 0.5055560186781269
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_059",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-25T00:00:00Z",
+      "home_team_id": 26,
+      "away_team_id": 38,
+      "home_team_name": "Tunisia",
+      "away_team_name": "Netherlands",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.20281450670285533,
+          "p_draw": 0.24554521532233786,
+          "p_away_win": 0.5516402779748067,
+          "p_btts": 0.5142307455395848,
+          "p_over_2_5": 0.5032500958464458
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_060",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-26T00:00:00Z",
+      "home_team_id": 2,
+      "away_team_id": 7,
+      "home_team_name": "Egypt",
+      "away_team_name": "Iran",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.371812135559984,
+          "p_draw": 0.32886432314066855,
+          "p_away_win": 0.29932354129934746,
+          "p_btts": 0.4185576545261895,
+          "p_over_2_5": 0.4995498817539599
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_061",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-26T00:00:00Z",
+      "home_team_id": 80,
+      "away_team_id": 22,
+      "home_team_name": "New Zealand",
+      "away_team_name": "Belgium",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.081754905211253,
+          "p_draw": 0.17339930804179302,
+          "p_away_win": 0.7448457867469541,
+          "p_btts": 0.4452039164686224,
+          "p_over_2_5": 0.5044947703691474
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_062",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-26T00:00:00Z",
+      "home_team_id": 81,
+      "away_team_id": 1,
+      "home_team_name": "Cape Verde",
+      "away_team_name": "Saudi Arabia",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.35222834890908483,
+          "p_draw": 0.32461040513472617,
+          "p_away_win": 0.32316124595618906,
+          "p_btts": 0.4305965547811518,
+          "p_over_2_5": 0.49968674779404315
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_063",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-26T00:00:00Z",
+      "home_team_id": 3,
+      "away_team_id": 5,
+      "home_team_name": "Uruguay",
+      "away_team_name": "Spain",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.2586445545834954,
+          "p_draw": 0.27801371926501733,
+          "p_away_win": 0.4633417261514873,
+          "p_btts": 0.4970331820776424,
+          "p_over_2_5": 0.5016030898417181
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_064",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-26T00:00:00Z",
+      "home_team_id": 83,
+      "away_team_id": 10,
+      "home_team_name": "Norway",
+      "away_team_name": "France",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.28358425052394043,
+          "p_draw": 0.2467185763224429,
+          "p_away_win": 0.46969717315361664,
+          "p_btts": 0.5505223460942643,
+          "p_over_2_5": 0.5052472527284126
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_065",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-26T00:00:00Z",
+      "home_team_id": 29,
+      "away_team_id": 82,
+      "home_team_name": "Senegal",
+      "away_team_name": "Iraq",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.6670890850656584,
+          "p_draw": 0.23038238874193173,
+          "p_away_win": 0.10252852619240986,
+          "p_btts": 0.3811832627143329,
+          "p_over_2_5": 0.5009661346449752
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_066",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-27T00:00:00Z",
+      "home_team_id": 55,
+      "away_team_id": 36,
+      "home_team_name": "Algeria",
+      "away_team_name": "Austria",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.37685996342721234,
+          "p_draw": 0.26445193467293543,
+          "p_away_win": 0.3586881018998523,
+          "p_btts": 0.5392833840994263,
+          "p_over_2_5": 0.5036623903417302
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_067",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-27T00:00:00Z",
+      "home_team_id": 84,
+      "away_team_id": 12,
+      "home_team_name": "Jordan",
+      "away_team_name": "Argentina",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.06763447042490749,
+          "p_draw": 0.16025625449541914,
+          "p_away_win": 0.7721092750796733,
+          "p_btts": 0.42205077105489475,
+          "p_over_2_5": 0.5046768250904662
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_068",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-27T00:00:00Z",
+      "home_team_id": 30,
+      "away_team_id": 4,
+      "home_team_name": "Colombia",
+      "away_team_name": "Portugal",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.35525301569701256,
+          "p_draw": 0.26866896043751476,
+          "p_away_win": 0.3760780238654728,
+          "p_btts": 0.5332462990353753,
+          "p_over_2_5": 0.5031781760045478
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_069",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-27T00:00:00Z",
+      "home_team_id": 85,
+      "away_team_id": 86,
+      "home_team_name": "DR Congo",
+      "away_team_name": "Uzbekistan",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.37337342245493677,
+          "p_draw": 0.3362700905276149,
+          "p_away_win": 0.2903564870174483,
+          "p_btts": 0.40181652145158386,
+          "p_over_2_5": 0.4993825663225085
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_070",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-27T00:00:00Z",
+      "home_team_id": 23,
+      "away_team_id": 27,
+      "home_team_name": "Panama",
+      "away_team_name": "England",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.06768750961645989,
+          "p_draw": 0.15687350601566435,
+          "p_away_win": 0.7754389843678758,
+          "p_btts": 0.43160935047260385,
+          "p_over_2_5": 0.5051440626354611
+        }
+      }
+    },
+    {
+      "match_id": "wc2026_grp_071",
+      "tournament_phase": "group",
+      "kickoff_utc": "2026-06-27T00:00:00Z",
+      "home_team_id": 8,
+      "away_team_id": 48,
+      "home_team_name": "Croatia",
+      "away_team_name": "Ghana",
+      "predictions": {
+        "wc2026_v3_calibrated_dibp_no_mv_no_hierarchy": {
+          "p_home_win": 0.7245052423806394,
+          "p_draw": 0.18486565053571288,
+          "p_away_win": 0.09062910708364774,
+          "p_btts": 0.4473143981386247,
+          "p_over_2_5": 0.5039201132404418
+        }
+      }
+    }
+  ],
+  "content_hash": "337dde76b1603cd715cdf14baaef583d46f7a7214a406af7376ee81bdffbd089"
+}

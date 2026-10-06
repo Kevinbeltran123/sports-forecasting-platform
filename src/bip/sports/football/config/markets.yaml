@@ -1,0 +1,26 @@
+markets:
+  - key: "btts"
+    display: "Both Teams to Score"
+    edge_threshold: 0.05
+    kelly_max: 0.25
+    odds_api_key: "btts"
+  - key: "ou"
+    display: "Over/Under 2.5"
+    edge_threshold: 0.05
+    kelly_max: 0.25
+    odds_api_key: "totals"
+  - key: "onextwo"
+    display: "1X2 Match Result"
+    edge_threshold: 0.08
+    kelly_max: 0.25
+    odds_api_key: "h2h"
+  - key: "ah"
+    display: "Asian Handicap"
+    edge_threshold: 0.06
+    kelly_max: 0.25
+    odds_api_key: "alternate_spreads"
+  - key: "corners"
+    display: "Corners"
+    edge_threshold: 0.07
+    kelly_max: 0.25
+    odds_api_key: null

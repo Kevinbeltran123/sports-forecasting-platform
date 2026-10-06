@@ -1,0 +1,26 @@
+name: "Serie A"
+slug: "serie_a"
+country: "Italy"
+
+api_mappings:
+  api_football_league_id: 135
+  odds_api_sport_key: "soccer_italy_serie_a"
+  team_name_mappings:
+    "AC Milan": "Milan"
+    "Inter": "Inter Milan"
+    "Internazionale": "Inter Milan"
+
+season_structure:
+  start_month: 8
+  end_month: 5
+  typical_matchdays: 38
+  winter_break: false
+
+model_params:
+  calibration_method: "isotonic"
+  edge_threshold_btts: 0.05
+  edge_threshold_ah: 0.06
+  edge_threshold_ou: 0.05
+  edge_threshold_1x2: 0.08
+  edge_threshold_corners: 0.07
+  min_sample_size: 500

@@ -1,0 +1,27 @@
+name: "Ligue 1"
+slug: "ligue_1"
+country: "France"
+
+api_mappings:
+  api_football_league_id: 61
+  odds_api_sport_key: "soccer_france_ligue_one"
+  team_name_mappings:
+    "Paris Saint Germain": "PSG"
+    "Paris Saint-Germain": "PSG"
+    "Olympique Marseille": "Marseille"
+    "Olympique Lyonnais": "Lyon"
+
+season_structure:
+  start_month: 8
+  end_month: 5
+  typical_matchdays: 34
+  winter_break: false
+
+model_params:
+  calibration_method: "isotonic"
+  edge_threshold_btts: 0.05
+  edge_threshold_ah: 0.06
+  edge_threshold_ou: 0.05
+  edge_threshold_1x2: 0.08
+  edge_threshold_corners: 0.07
+  min_sample_size: 500

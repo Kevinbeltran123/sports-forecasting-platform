@@ -1,0 +1,47 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+dist/
+build/
+*.egg-info/
+
+# Tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+catboost_info/
+
+# Data dumps and regenerable artifacts
+data/cache/
+data/raw/
+data/training/
+models/
+*.parquet
+*.sqlite
+*.db
+*.dump
+*.sql.gz
+supabase/.temp/
+scripts/corners_gate_coverage.md
+src/bip/evaluation/**/reports/
+src/bip/evaluation/**/cache/
+reports/
+logs/
+
+# Local working notes (written by analysis_log.py)
+notes/
+Papers/
+
+# OS / editor
+.DS_Store
+**/.DS_Store
+.idea/
+.vscode/

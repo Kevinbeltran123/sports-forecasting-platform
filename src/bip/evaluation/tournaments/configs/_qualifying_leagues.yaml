@@ -1,0 +1,44 @@
+# API-Football league IDs for World Cup 2026 qualifying campaigns.
+#
+# Each entry maps a confederation to its qualifying league ID + season.
+# IDs below are placeholders sourced from API-Football v3 documentation
+# but MUST be verified against /leagues?country=World&type=Cup once
+# .env is populated. The qualifying_loader will refuse to run until
+# every entry has been verified (see TODO markers below).
+#
+# To verify:
+#   uv run python -m bip.evaluation.tournaments.data.qualifying_loader \
+#       --verify-league-ids
+#
+# Source: https://www.api-football.com/documentation-v3#tag/Leagues
+
+leagues:
+  - confederation: uefa
+    api_football_league_id: 32        # TODO(operator): verify — UEFA WCQ Europe 2025
+    season: 2025
+    name: "UEFA World Cup Qualifying 2026"
+
+  - confederation: conmebol
+    api_football_league_id: 34        # TODO(operator): verify — CONMEBOL WCQ
+    season: 2024
+    name: "CONMEBOL World Cup Qualifying 2026"
+
+  - confederation: afc
+    api_football_league_id: 29        # TODO(operator): verify — AFC WCQ Round 3
+    season: 2025
+    name: "AFC World Cup Qualifying 2026"
+
+  - confederation: caf
+    api_football_league_id: 28        # TODO(operator): verify — CAF WCQ
+    season: 2025
+    name: "CAF World Cup Qualifying 2026"
+
+  - confederation: concacaf
+    api_football_league_id: 31        # TODO(operator): verify — CONCACAF WCQ
+    season: 2025
+    name: "CONCACAF World Cup Qualifying 2026"
+
+  - confederation: ofc
+    api_football_league_id: 33        # TODO(operator): verify — OFC WCQ
+    season: 2024
+    name: "OFC World Cup Qualifying 2026"

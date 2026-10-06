@@ -1,0 +1,16 @@
+# UEFA Euro 2024 — Germany (backtest target)
+# Format: 24 teams, 6 groups of 4, top-2 + 4 best 3rd-placed advance,
+#         R16 -> QF -> SF -> Final.
+
+slug: euro_2024
+name: "UEFA European Championship 2024"
+format: groups_knockout
+season: 2024
+start_date: 2024-06-14
+end_date: 2024-07-14
+participants_count: 24
+teams_advancing_per_group: 2
+best_third_placed_count: 4
+knockout_bracket_size: 16
+groups: []
+matches: []

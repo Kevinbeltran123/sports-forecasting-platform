@@ -1,0 +1,30 @@
+# FIFA World Cup 2026 — United States / Mexico / Canada
+#
+# Format (FIFA Council 2023 confirmed):
+# - 48 teams, 12 groups of 4
+# - Top 2 from each group + 8 best 3rd-placed teams advance
+# - Round of 32 -> R16 -> QF -> SF -> Final
+# - Total matches: 104 (72 group + 32 knockout)
+#
+# Groups intentionally empty: the official draw was held 2025-12-05,
+# but team_ids must be filled by the operator from API-Football's
+# /teams?country=... lookups, NOT fabricated. See:
+# internal planning notes §5 R-01 (data integrity).
+
+slug: world_cup_2026
+name: "FIFA World Cup 2026"
+format: groups_knockout
+season: 2026
+start_date: 2026-06-11
+end_date: 2026-07-19
+participants_count: 48
+teams_advancing_per_group: 2
+best_third_placed_count: 8
+knockout_bracket_size: 32
+
+# Groups: 12 groups (A-L). Filled by operator post-draw verification.
+groups: []
+
+# Matches: 104 fixtures pulled from API-Football /fixtures?league=1&season=2026
+# at runtime by qualifying_loader. Empty at config time.
+matches: []

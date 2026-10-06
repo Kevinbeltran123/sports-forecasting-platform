@@ -1,0 +1,16 @@
+# FIFA World Cup 2022 — Qatar (backtest target)
+# Format: 32 teams, 8 groups of 4, top-2 advance, R16 -> QF -> SF -> Final
+# Groups + matches populated by qualifying_loader from API-Football historical.
+
+slug: world_cup_2022
+name: "FIFA World Cup 2022"
+format: groups_knockout
+season: 2022
+start_date: 2022-11-20
+end_date: 2022-12-18
+participants_count: 32
+teams_advancing_per_group: 2
+best_third_placed_count: 0
+knockout_bracket_size: 16
+groups: []
+matches: []
