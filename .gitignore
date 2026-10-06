@@ -23,7 +23,7 @@ catboost_info/
 data/cache/
 data/raw/
 data/training/
-models/
+/models/
 *.parquet
 *.sqlite
 *.db
